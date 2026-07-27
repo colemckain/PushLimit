@@ -6,41 +6,63 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		022ADBAA2F6C68A400B2204E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 022ADBA92F6C68A400B2204E /* FirebaseAuth */; };
+		022ADBAC2F6C68A400B2204E /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 022ADBAB2F6C68A400B2204E /* FirebaseCore */; };
+		022ADBAE2F6D00CC00B2204E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 022ADBAD2F6D00CB00B2204E /* GoogleService-Info.plist */; };
+		022ADBB52F6C68A400B2204E /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 022ADBB62F6C68A400B2204E /* FirebaseFirestore */; };
+		022ADBB72F6D100000B2204E /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = 022ADBB82F6D100000B2204E /* FirebaseAppCheck */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
-		02C8EDBB2DDFE6A100D5CB73 /* PBXContainerItemProxy */ = {
+		02643D1E2E0345B30015DB74 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 02C8EDA52DDFE69700D5CB73 /* Project object */;
+			containerPortal = 02643D042E0345AF0015DB74 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 02C8EDAC2DDFE69800D5CB73;
+			remoteGlobalIDString = 02643D0B2E0345AF0015DB74;
 			remoteInfo = PushLimit;
 		};
-		02C8EDC52DDFE6A100D5CB73 /* PBXContainerItemProxy */ = {
+		02643D282E0345B30015DB74 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 02C8EDA52DDFE69700D5CB73 /* Project object */;
+			containerPortal = 02643D042E0345AF0015DB74 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 02C8EDAC2DDFE69800D5CB73;
+			remoteGlobalIDString = 02643D0B2E0345AF0015DB74;
 			remoteInfo = PushLimit;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		02C8EDAD2DDFE69800D5CB73 /* PushLimit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushLimit.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		02C8EDBA2DDFE6A100D5CB73 /* PushLimitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushLimitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		02C8EDC42DDFE6A100D5CB73 /* PushLimitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushLimitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		022ADBAD2F6D00CB00B2204E /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		02643D0C2E0345AF0015DB74 /* PushLimit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PushLimit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		02643D1D2E0345B30015DB74 /* PushLimitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushLimitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		02643D272E0345B30015DB74 /* PushLimitUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushLimitUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		02643D2F2E0345B30015DB74 /* Exceptions for "PushLimit" folder in "PushLimit" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 02643D0B2E0345AF0015DB74 /* PushLimit */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		02C8EDAF2DDFE69800D5CB73 /* PushLimit */ = {
+		02643D0E2E0345AF0015DB74 /* PushLimit */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				02643D2F2E0345B30015DB74 /* Exceptions for "PushLimit" folder in "PushLimit" target */,
+			);
 			path = PushLimit;
 			sourceTree = "<group>";
 		};
-		02C8EDBD2DDFE6A100D5CB73 /* PushLimitTests */ = {
+		02643D202E0345B30015DB74 /* PushLimitTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PushLimitTests;
 			sourceTree = "<group>";
 		};
-		02C8EDC72DDFE6A100D5CB73 /* PushLimitUITests */ = {
+		02643D2A2E0345B30015DB74 /* PushLimitUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = PushLimitUITests;
 			sourceTree = "<group>";
@@ -48,21 +70,25 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		02C8EDAA2DDFE69800D5CB73 /* Frameworks */ = {
+		02643D092E0345AF0015DB74 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				022ADBAC2F6C68A400B2204E /* FirebaseCore in Frameworks */,
+				022ADBAA2F6C68A400B2204E /* FirebaseAuth in Frameworks */,
+				022ADBB52F6C68A400B2204E /* FirebaseFirestore in Frameworks */,
+				022ADBB72F6D100000B2204E /* FirebaseAppCheck in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02643D1A2E0345B30015DB74 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02C8EDB72DDFE6A100D5CB73 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		02C8EDC12DDFE6A100D5CB73 /* Frameworks */ = {
+		02643D242E0345B30015DB74 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -72,22 +98,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		02C8EDA42DDFE69700D5CB73 = {
+		02643D032E0345AF0015DB74 = {
 			isa = PBXGroup;
 			children = (
-				02C8EDAF2DDFE69800D5CB73 /* PushLimit */,
-				02C8EDBD2DDFE6A100D5CB73 /* PushLimitTests */,
-				02C8EDC72DDFE6A100D5CB73 /* PushLimitUITests */,
-				02C8EDAE2DDFE69800D5CB73 /* Products */,
+				02643D0E2E0345AF0015DB74 /* PushLimit */,
+				02643D202E0345B30015DB74 /* PushLimitTests */,
+				02643D2A2E0345B30015DB74 /* PushLimitUITests */,
+				02643D0D2E0345AF0015DB74 /* Products */,
+				022ADBAD2F6D00CB00B2204E /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
-		02C8EDAE2DDFE69800D5CB73 /* Products */ = {
+		02643D0D2E0345AF0015DB74 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				02C8EDAD2DDFE69800D5CB73 /* PushLimit.app */,
-				02C8EDBA2DDFE6A100D5CB73 /* PushLimitTests.xctest */,
-				02C8EDC42DDFE6A100D5CB73 /* PushLimitUITests.xctest */,
+				02643D0C2E0345AF0015DB74 /* PushLimit.app */,
+				02643D1D2E0345B30015DB74 /* PushLimitTests.xctest */,
+				02643D272E0345B30015DB74 /* PushLimitUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -95,134 +122,142 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		02C8EDAC2DDFE69800D5CB73 /* PushLimit */ = {
+		02643D0B2E0345AF0015DB74 /* PushLimit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02C8EDCE2DDFE6A100D5CB73 /* Build configuration list for PBXNativeTarget "PushLimit" */;
+			buildConfigurationList = 02643D302E0345B30015DB74 /* Build configuration list for PBXNativeTarget "PushLimit" */;
 			buildPhases = (
-				02C8EDA92DDFE69800D5CB73 /* Sources */,
-				02C8EDAA2DDFE69800D5CB73 /* Frameworks */,
-				02C8EDAB2DDFE69800D5CB73 /* Resources */,
+				02643D082E0345AF0015DB74 /* Sources */,
+				02643D092E0345AF0015DB74 /* Frameworks */,
+				02643D0A2E0345AF0015DB74 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				02C8EDAF2DDFE69800D5CB73 /* PushLimit */,
+				02643D0E2E0345AF0015DB74 /* PushLimit */,
 			);
 			name = PushLimit;
 			packageProductDependencies = (
+				022ADBA92F6C68A400B2204E /* FirebaseAuth */,
+				022ADBAB2F6C68A400B2204E /* FirebaseCore */,
+				022ADBB62F6C68A400B2204E /* FirebaseFirestore */,
+				022ADBB82F6D100000B2204E /* FirebaseAppCheck */,
 			);
 			productName = PushLimit;
-			productReference = 02C8EDAD2DDFE69800D5CB73 /* PushLimit.app */;
+			productReference = 02643D0C2E0345AF0015DB74 /* PushLimit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		02C8EDB92DDFE6A100D5CB73 /* PushLimitTests */ = {
+		02643D1C2E0345B30015DB74 /* PushLimitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02C8EDD12DDFE6A100D5CB73 /* Build configuration list for PBXNativeTarget "PushLimitTests" */;
+			buildConfigurationList = 02643D352E0345B30015DB74 /* Build configuration list for PBXNativeTarget "PushLimitTests" */;
 			buildPhases = (
-				02C8EDB62DDFE6A100D5CB73 /* Sources */,
-				02C8EDB72DDFE6A100D5CB73 /* Frameworks */,
-				02C8EDB82DDFE6A100D5CB73 /* Resources */,
+				02643D192E0345B30015DB74 /* Sources */,
+				02643D1A2E0345B30015DB74 /* Frameworks */,
+				02643D1B2E0345B30015DB74 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				02C8EDBC2DDFE6A100D5CB73 /* PBXTargetDependency */,
+				02643D1F2E0345B30015DB74 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				02C8EDBD2DDFE6A100D5CB73 /* PushLimitTests */,
+				02643D202E0345B30015DB74 /* PushLimitTests */,
 			);
 			name = PushLimitTests;
 			packageProductDependencies = (
 			);
 			productName = PushLimitTests;
-			productReference = 02C8EDBA2DDFE6A100D5CB73 /* PushLimitTests.xctest */;
+			productReference = 02643D1D2E0345B30015DB74 /* PushLimitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		02C8EDC32DDFE6A100D5CB73 /* PushLimitUITests */ = {
+		02643D262E0345B30015DB74 /* PushLimitUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02C8EDD42DDFE6A100D5CB73 /* Build configuration list for PBXNativeTarget "PushLimitUITests" */;
+			buildConfigurationList = 02643D382E0345B30015DB74 /* Build configuration list for PBXNativeTarget "PushLimitUITests" */;
 			buildPhases = (
-				02C8EDC02DDFE6A100D5CB73 /* Sources */,
-				02C8EDC12DDFE6A100D5CB73 /* Frameworks */,
-				02C8EDC22DDFE6A100D5CB73 /* Resources */,
+				02643D232E0345B30015DB74 /* Sources */,
+				02643D242E0345B30015DB74 /* Frameworks */,
+				02643D252E0345B30015DB74 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				02C8EDC62DDFE6A100D5CB73 /* PBXTargetDependency */,
+				02643D292E0345B30015DB74 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				02C8EDC72DDFE6A100D5CB73 /* PushLimitUITests */,
+				02643D2A2E0345B30015DB74 /* PushLimitUITests */,
 			);
 			name = PushLimitUITests;
 			packageProductDependencies = (
 			);
 			productName = PushLimitUITests;
-			productReference = 02C8EDC42DDFE6A100D5CB73 /* PushLimitUITests.xctest */;
+			productReference = 02643D272E0345B30015DB74 /* PushLimitUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		02C8EDA52DDFE69700D5CB73 /* Project object */ = {
+		02643D042E0345AF0015DB74 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1630;
-				LastUpgradeCheck = 1630;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
-					02C8EDAC2DDFE69800D5CB73 = {
-						CreatedOnToolsVersion = 16.3;
+					02643D0B2E0345AF0015DB74 = {
+						CreatedOnToolsVersion = 16.4;
 					};
-					02C8EDB92DDFE6A100D5CB73 = {
-						CreatedOnToolsVersion = 16.3;
-						TestTargetID = 02C8EDAC2DDFE69800D5CB73;
+					02643D1C2E0345B30015DB74 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 02643D0B2E0345AF0015DB74;
 					};
-					02C8EDC32DDFE6A100D5CB73 = {
-						CreatedOnToolsVersion = 16.3;
-						TestTargetID = 02C8EDAC2DDFE69800D5CB73;
+					02643D262E0345B30015DB74 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 02643D0B2E0345AF0015DB74;
 					};
 				};
 			};
-			buildConfigurationList = 02C8EDA82DDFE69800D5CB73 /* Build configuration list for PBXProject "PushLimit" */;
+			buildConfigurationList = 02643D072E0345AF0015DB74 /* Build configuration list for PBXProject "PushLimit" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 02C8EDA42DDFE69700D5CB73;
+			mainGroup = 02643D032E0345AF0015DB74;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				022ADBA82F6C68A400B2204E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 02C8EDAE2DDFE69800D5CB73 /* Products */;
+			productRefGroup = 02643D0D2E0345AF0015DB74 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				02C8EDAC2DDFE69800D5CB73 /* PushLimit */,
-				02C8EDB92DDFE6A100D5CB73 /* PushLimitTests */,
-				02C8EDC32DDFE6A100D5CB73 /* PushLimitUITests */,
+				02643D0B2E0345AF0015DB74 /* PushLimit */,
+				02643D1C2E0345B30015DB74 /* PushLimitTests */,
+				02643D262E0345B30015DB74 /* PushLimitUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		02C8EDAB2DDFE69800D5CB73 /* Resources */ = {
+		02643D0A2E0345AF0015DB74 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				022ADBAE2F6D00CC00B2204E /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		02643D1B2E0345B30015DB74 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02C8EDB82DDFE6A100D5CB73 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		02C8EDC22DDFE6A100D5CB73 /* Resources */ = {
+		02643D252E0345B30015DB74 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -232,21 +267,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		02C8EDA92DDFE69800D5CB73 /* Sources */ = {
+		02643D082E0345AF0015DB74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02C8EDB62DDFE6A100D5CB73 /* Sources */ = {
+		02643D192E0345B30015DB74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		02C8EDC02DDFE6A100D5CB73 /* Sources */ = {
+		02643D232E0345B30015DB74 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -256,20 +291,100 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		02C8EDBC2DDFE6A100D5CB73 /* PBXTargetDependency */ = {
+		02643D1F2E0345B30015DB74 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 02C8EDAC2DDFE69800D5CB73 /* PushLimit */;
-			targetProxy = 02C8EDBB2DDFE6A100D5CB73 /* PBXContainerItemProxy */;
+			target = 02643D0B2E0345AF0015DB74 /* PushLimit */;
+			targetProxy = 02643D1E2E0345B30015DB74 /* PBXContainerItemProxy */;
 		};
-		02C8EDC62DDFE6A100D5CB73 /* PBXTargetDependency */ = {
+		02643D292E0345B30015DB74 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 02C8EDAC2DDFE69800D5CB73 /* PushLimit */;
-			targetProxy = 02C8EDC52DDFE6A100D5CB73 /* PBXContainerItemProxy */;
+			target = 02643D0B2E0345AF0015DB74 /* PushLimit */;
+			targetProxy = 02643D282E0345B30015DB74 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		02C8EDCC2DDFE6A100D5CB73 /* Debug */ = {
+		02643D312E0345B30015DB74 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PushLimit/PushLimit.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 8WU84H5ZHB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PushLimit/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PushLimit;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs access to camera to take photos for your profile.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for secure authentication.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "PushLimit uses your location during active leg runs to track distance and map your route, including while the screen is locked or you switch to another app. Tracking stops when you pause or finish the run.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs access to microphone for voice features.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to photo library to select profile pictures.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rcmckain.pushlimit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		02643D322E0345B30015DB74 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = PushLimit/PushLimit.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 8WU84H5ZHB;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = PushLimit/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = PushLimit;
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app needs access to camera to take photos for your profile.";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This app uses Face ID for secure authentication.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "PushLimit uses your location during active leg runs to track distance and map your route, including while the screen is locked or you switch to another app. Tracking stops when you pause or finish the run.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs access to microphone for voice features.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app needs access to photo library to select profile pictures.";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIRequiredDeviceCapabilities = armv7;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 3.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rcmckain.pushlimit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+		02643D332E0345B30015DB74 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -322,7 +437,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -333,7 +448,7 @@
 			};
 			name = Debug;
 		};
-		02C8EDCD2DDFE6A100D5CB73 /* Release */ = {
+		02643D342E0345B30015DB74 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -380,7 +495,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -390,63 +505,7 @@
 			};
 			name = Release;
 		};
-		02C8EDCF2DDFE6A100D5CB73 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WU84H5ZHB;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = rcmckain.tech.PushLimit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		02C8EDD02DDFE6A100D5CB73 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8WU84H5ZHB;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
-				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = rcmckain.tech.PushLimit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		02C8EDD22DDFE6A100D5CB73 /* Debug */ = {
+		02643D362E0345B30015DB74 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -454,9 +513,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8WU84H5ZHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = rcmckain.tech.PushLimitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rcmckain.pushlimit.PushLimitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -465,7 +524,7 @@
 			};
 			name = Debug;
 		};
-		02C8EDD32DDFE6A100D5CB73 /* Release */ = {
+		02643D372E0345B30015DB74 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -473,9 +532,9 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 8WU84H5ZHB;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = rcmckain.tech.PushLimitTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rcmckain.pushlimit.PushLimitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -484,7 +543,7 @@
 			};
 			name = Release;
 		};
-		02C8EDD52DDFE6A100D5CB73 /* Debug */ = {
+		02643D392E0345B30015DB74 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -492,7 +551,7 @@
 				DEVELOPMENT_TEAM = 8WU84H5ZHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = rcmckain.tech.PushLimitUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rcmckain.pushlimit.PushLimitUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -501,7 +560,7 @@
 			};
 			name = Debug;
 		};
-		02C8EDD62DDFE6A100D5CB73 /* Release */ = {
+		02643D3A2E0345B30015DB74 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -509,7 +568,7 @@
 				DEVELOPMENT_TEAM = 8WU84H5ZHB;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = rcmckain.tech.PushLimitUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rcmckain.pushlimit.PushLimitUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -521,43 +580,77 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		02C8EDA82DDFE69800D5CB73 /* Build configuration list for PBXProject "PushLimit" */ = {
+		02643D072E0345AF0015DB74 /* Build configuration list for PBXProject "PushLimit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02C8EDCC2DDFE6A100D5CB73 /* Debug */,
-				02C8EDCD2DDFE6A100D5CB73 /* Release */,
+				02643D332E0345B30015DB74 /* Debug */,
+				02643D342E0345B30015DB74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		02C8EDCE2DDFE6A100D5CB73 /* Build configuration list for PBXNativeTarget "PushLimit" */ = {
+		02643D302E0345B30015DB74 /* Build configuration list for PBXNativeTarget "PushLimit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02C8EDCF2DDFE6A100D5CB73 /* Debug */,
-				02C8EDD02DDFE6A100D5CB73 /* Release */,
+				02643D312E0345B30015DB74 /* Debug */,
+				02643D322E0345B30015DB74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		02C8EDD12DDFE6A100D5CB73 /* Build configuration list for PBXNativeTarget "PushLimitTests" */ = {
+		02643D352E0345B30015DB74 /* Build configuration list for PBXNativeTarget "PushLimitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02C8EDD22DDFE6A100D5CB73 /* Debug */,
-				02C8EDD32DDFE6A100D5CB73 /* Release */,
+				02643D362E0345B30015DB74 /* Debug */,
+				02643D372E0345B30015DB74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		02C8EDD42DDFE6A100D5CB73 /* Build configuration list for PBXNativeTarget "PushLimitUITests" */ = {
+		02643D382E0345B30015DB74 /* Build configuration list for PBXNativeTarget "PushLimitUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				02C8EDD52DDFE6A100D5CB73 /* Debug */,
-				02C8EDD62DDFE6A100D5CB73 /* Release */,
+				02643D392E0345B30015DB74 /* Debug */,
+				02643D3A2E0345B30015DB74 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		022ADBA82F6C68A400B2204E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.11.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		022ADBA92F6C68A400B2204E /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 022ADBA82F6C68A400B2204E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		022ADBAB2F6C68A400B2204E /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 022ADBA82F6C68A400B2204E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		022ADBB62F6C68A400B2204E /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 022ADBA82F6C68A400B2204E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		022ADBB82F6D100000B2204E /* FirebaseAppCheck */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 022ADBA82F6C68A400B2204E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAppCheck;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 02C8EDA52DDFE69700D5CB73 /* Project object */;
+	rootObject = 02643D042E0345AF0015DB74 /* Project object */;
 }

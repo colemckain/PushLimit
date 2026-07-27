@@ -1,0 +1,64 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isVerifiedOwner(userId) {
+      return request.auth != null
+        && request.auth.uid == userId
+        && request.auth.token.email_verified == true;
+    }
+
+    function optionalStringField(field, maxLen) {
+      return !(field in request.resource.data)
+        || (request.resource.data[field] is string
+            && request.resource.data[field].size() <= maxLen);
+    }
+
+    // Matches field limits in `RemoteSnapshotValidator.swift` and `FIRESTORE_SETUP.md`.
+    function validUserDocument() {
+      let data = request.resource.data;
+      let allowedKeys = [
+        'userName',
+        'userProfileJson',
+        'fitnessAssessmentJson',
+        'workoutPlanJson',
+        'workoutsJson',
+        'levelInfoJson',
+        'weeklyGoalsJson',
+        'weeklyProgressJson',
+        'schemaVersion',
+        'updatedAt'
+      ];
+
+      return data.keys().hasOnly(allowedKeys)
+        && data.userName is string
+        && data.userName.size() >= 1
+        && data.userName.size() <= 100
+        && data.userProfileJson is string
+        && data.userProfileJson.size() <= 51200
+        && optionalStringField('fitnessAssessmentJson', 20480)
+        && optionalStringField('workoutPlanJson', 102400)
+        && data.workoutsJson is string
+        && data.workoutsJson.size() <= 512000
+        && data.levelInfoJson is string
+        && data.levelInfoJson.size() <= 10240
+        && data.weeklyGoalsJson is string
+        && data.weeklyGoalsJson.size() <= 10240
+        && data.weeklyProgressJson is string
+        && data.weeklyProgressJson.size() <= 10240
+        && data.schemaVersion is int
+        && data.schemaVersion >= 1
+        && data.schemaVersion <= 10
+        && data.updatedAt == request.time;
+    }
+
+    match /users/{userId} {
+      allow read, delete: if isVerifiedOwner(userId);
+      allow create, update: if isVerifiedOwner(userId) && validUserDocument();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
