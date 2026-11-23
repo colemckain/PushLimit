@@ -391,7 +391,7 @@ struct SplashScreen: View {
                                 )
                             )
 
-                        Text("Limits exist — rise above")
+                        Text("limits exist — rise above")
                             .font(.system(size: 15, weight: .medium))
                             .foregroundColor(.customSecondaryLabel)
                             .tracking(0.3)
