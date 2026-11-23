@@ -279,6 +279,7 @@ struct WorkoutSessionScreen: View {
             )
             .presentationDetents([.large])
             .presentationDragIndicator(.visible)
+            .presentationContentInteraction(.resizes)
         }
         .alert("Cancel Workout?", isPresented: $showCancelAlert) {
             Button("Keep Going", role: .cancel) {}
