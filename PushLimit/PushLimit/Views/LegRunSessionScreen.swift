@@ -115,6 +115,7 @@ struct LegRunSessionScreen: View {
             )
             .presentationDetents([.large])
             .presentationDragIndicator(.visible)
+            .presentationContentInteraction(.resizes)
         }
         .alert("Cancel run?", isPresented: $showCancelAlert) {
             Button("Keep running", role: .cancel) {}
