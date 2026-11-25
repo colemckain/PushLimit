@@ -6,6 +6,8 @@ struct WorkoutSessionScreen: View {
     @Binding var selectedTab: Int
     @ObservedObject var workoutViewModel: WorkoutViewModel
     var onWorkoutCompleted: (() -> Void)?
+    /// Push-ups: today's total is one block. The user marks it complete — no set timer.
+    var repItOut: Bool = false
     
     @State private var currentSetIndex = 0
     @State private var isResting = false
@@ -132,11 +134,13 @@ struct WorkoutSessionScreen: View {
         return nil
     }
     
-    private var totalSets: Int { 
-        workoutPlanData?.sets ?? getSetBreakdown(repGoal).count
+    private var totalSets: Int {
+        if repItOut { return 1 }
+        return workoutPlanData?.sets ?? getSetBreakdown(repGoal).count
     }
-    private var currentSetReps: Int { 
-        workoutPlanData?.repsPerSet ?? getSetBreakdown(repGoal)[safe: currentSetIndex] ?? 0
+    private var currentSetReps: Int {
+        if repItOut { return max(repGoal, 0) }
+        return workoutPlanData?.repsPerSet ?? getSetBreakdown(repGoal)[safe: currentSetIndex] ?? 0
     }
     
     // Workout phase management
@@ -343,6 +347,8 @@ struct WorkoutSessionScreen: View {
     private func presentEntryWarmupIfNeeded() {
         guard !hasPresentedEntryWarmup else { return }
         hasPresentedEntryWarmup = true
+        // Rep it out opens straight on the complete-reps action. Warm-up stays available on the screen.
+        guard !repItOut else { return }
         showWarmup = true
     }
     
@@ -380,7 +386,9 @@ struct WorkoutSessionScreen: View {
                             .foregroundColor(.customLabel)
                             .lineLimit(1)
                             .minimumScaleFactor(0.85)
-                        Text("\(currentExercisePlan.sets)×\(currentExercisePlan.repsPerSet) · \(currentExercisePlan.totalReps) total")
+                        Text(repItOut
+                             ? "Rep it out · \(repGoal) in one go"
+                             : "\(currentExercisePlan.sets)×\(currentExercisePlan.repsPerSet) · \(currentExercisePlan.totalReps) total")
                             .font(.system(size: 12, weight: .medium))
                             .foregroundColor(.customSecondaryLabel)
                             .lineLimit(1)
@@ -437,7 +445,7 @@ struct WorkoutSessionScreen: View {
                     .font(.system(size: 15, weight: .bold))
                     .foregroundColor(.customLabel)
                     .lineLimit(1)
-                Text("Session")
+                Text(repItOut ? "Rep it out · \(repGoal) in one go" : "Session")
                     .font(.system(size: 12, weight: .medium))
                     .foregroundColor(.customSecondaryLabel)
             }
@@ -502,7 +510,88 @@ struct WorkoutSessionScreen: View {
     }
     
     // MARK: - Compact Ready View
+    @ViewBuilder
     private var compactReadyView: some View {
+        if repItOut {
+            repItOutReadyView
+        } else {
+            plannedSetReadyView
+        }
+    }
+
+    /// One block of today's push-ups. No rep timer — mark them complete after they're done.
+    private var repItOutReadyView: some View {
+        VStack(spacing: 0) {
+            sessionTopControls {
+                VStack(spacing: 4) {
+                    Text("Rep it out")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(workoutViewModel.themeColor)
+                    Text("One go · no sets")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundColor(.customSecondaryLabel)
+                }
+            }
+
+            sessionCenteredStack {
+                VStack(spacing: 14) {
+                    repCounterRing(
+                        progress: 1,
+                        caption: "Today's push-ups",
+                        mainText: "\(repGoal)",
+                        subText: "reps",
+                        mainFontSize: 52
+                    )
+
+                    Text(repItOutInstruction)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundColor(.customLabel)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 12)
+
+                    Button(action: { showWarmup = true }) {
+                        HStack(spacing: 0) {
+                            Image(systemName: "flame.fill")
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(workoutViewModel.themeColor)
+                                .frame(width: 22, alignment: .leading)
+
+                            Text("View warm-up")
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundColor(workoutViewModel.themeColor)
+                                .frame(maxWidth: .infinity)
+                                .multilineTextAlignment(.center)
+
+                            Image(systemName: "chevron.up")
+                                .font(.system(size: 12, weight: .semibold))
+                                .foregroundColor(.customSecondaryLabel)
+                                .frame(width: 22, alignment: .trailing)
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
+                        .frame(maxWidth: .infinity)
+                        .background(workoutViewModel.themeColor.opacity(0.12))
+                        .cornerRadius(12)
+                    }
+                    .padding(.horizontal, 8)
+                }
+            }
+
+            sessionBottomBar {
+                sessionActionButtonPair(
+                    primaryTitle: "Complete reps",
+                    primaryIcon: "checkmark.circle.fill",
+                    primaryColors: [Color.green, Color.green.opacity(0.85)],
+                    primaryAction: completeRepItOut,
+                    secondaryTitle: "Cancel",
+                    secondaryAction: { showCancelAlert = true }
+                )
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
+    private var plannedSetReadyView: some View {
         VStack(spacing: 0) {
             sessionTopControls {
                 VStack(spacing: 8) {
@@ -1010,11 +1099,14 @@ struct WorkoutSessionScreen: View {
         NavigationView {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    Text("Saved for \(exercise.name). Changes apply after you tap Save.")
+                    Text(repItOut
+                         ? "No timer on Rep it out. Do the push-ups, then tap Complete reps. End here if you’re stopping."
+                         : "Saved for \(exercise.name). Changes apply after you tap Save.")
                         .font(.system(size: 14, weight: .medium))
                         .foregroundColor(.customSecondaryLabel)
                         .fixedSize(horizontal: false, vertical: true)
                     
+                    if !repItOut {
                     settingsCard(title: "Rep pace", subtitle: "How long each auto-counted rep takes.") {
                         settingsValueLabel(String(format: "%.2f sec", draftSecondsPerRep))
                         
@@ -1123,6 +1215,7 @@ struct WorkoutSessionScreen: View {
                     .foregroundColor(workoutViewModel.themeColor)
                     .frame(maxWidth: .infinity)
                     .padding(.top, 4)
+                    }
                     
                     Divider()
                         .padding(.vertical, 8)
@@ -1144,7 +1237,9 @@ struct WorkoutSessionScreen: View {
                         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                     }
                     
-                    Text("Saves completed reps (and wall-sit time) toward today’s goals, then ends the session.")
+                    Text(repItOut
+                         ? "Ending now won’t count this block. Tap Complete reps after you finish the push-ups."
+                         : "Saves completed reps (and wall-sit time) toward today’s goals, then ends the session.")
                         .font(.system(size: 13, weight: .medium))
                         .foregroundColor(.customSecondaryLabel)
                         .fixedSize(horizontal: false, vertical: true)
@@ -1161,13 +1256,15 @@ struct WorkoutSessionScreen: View {
                     }
                     .foregroundColor(.customSecondaryLabel)
                 }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Save") {
-                        saveSessionSettings()
+                if !repItOut {
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button("Save") {
+                            saveSessionSettings()
+                        }
+                        .fontWeight(.semibold)
+                        .foregroundColor(workoutViewModel.themeColor)
+                        .disabled(!sessionSettingsHaveChanges)
                     }
-                    .fontWeight(.semibold)
-                    .foregroundColor(workoutViewModel.themeColor)
-                    .disabled(!sessionSettingsHaveChanges)
                 }
             }
         }
@@ -1459,6 +1556,20 @@ struct WorkoutSessionScreen: View {
         // Ready phase: user taps through Ready → Go; no timer to restart yet.
     }
     
+    private var repItOutInstruction: String {
+        let prior = workoutViewModel.repsLoggedToday(forExerciseId: exercise.id)
+        if prior > 0 {
+            return "Do all \(repGoal) push-ups, then tap Complete reps. \(prior) already saved still count."
+        }
+        return "Do all \(repGoal) push-ups, then tap Complete reps."
+    }
+
+    private func completeRepItOut() {
+        guard repItOut, !didFinalizeSession, repGoal > 0 else { return }
+        completedRepsThisSession = repGoal
+        finishWorkout(earlyEnd: false)
+    }
+
     private func completeSet() {
         repTimer?.invalidate()
         repTimer = nil
@@ -1584,6 +1695,9 @@ struct WorkoutSessionScreen: View {
             savedParts.append("\(wallTotal)s of wall sit")
         }
         let saved = savedParts.joined(separator: " and ")
+        if repItOut {
+            return "We’ll save \(saved) toward today’s goals. To mark this workout Done, finish the full set of push-ups and tap Complete reps."
+        }
         return "We’ll save \(saved) toward today’s goals. To mark this workout Done, you’ll need to restart and finish the full set–rest session in one sitting — that’s where the stimulus comes from."
     }
     
@@ -1673,7 +1787,7 @@ struct WorkoutSessionScreen: View {
         }
         stopAllSessionTimers()
         
-        let planReps = workoutPlanData?.totalReps ?? repGoal
+        let planReps = repItOut ? repGoal : (workoutPlanData?.totalReps ?? repGoal)
         let priorLogged = workoutViewModel.repsLoggedToday(forExerciseId: exercise.id)
         
         let sessionReps: Int

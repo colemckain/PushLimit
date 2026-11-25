@@ -7,6 +7,8 @@ struct WorkoutScreen: View {
     @State private var selectedExercise: Exercise?
     @State private var sessionExercise: Exercise?
     @State private var sessionReps: Int?
+    /// Push-ups only: one block of today's total, marked complete by the user.
+    @State private var sessionRepItOut = false
     @State private var navigateToSession = false
     @State private var navigateToRunSession = false
     @State private var navigateToCoreHub = false
@@ -91,7 +93,9 @@ struct WorkoutScreen: View {
                         selectedExercise = nil
                         sessionExercise = nil
                         sessionReps = nil
-                    }
+                        sessionRepItOut = false
+                    },
+                    repItOut: sessionRepItOut
                 )
             }
         }
@@ -143,11 +147,18 @@ struct WorkoutScreen: View {
             !workoutViewModel.hasCompletedExerciseToday(exerciseId: ex.id)
     }
 
+    private var shouldShowPushModeChoice: Bool {
+        guard !isRestDay, let ex = selectedExercise else { return false }
+        return ex.id == "pushups" &&
+            !workoutViewModel.hasCompletedExerciseToday(exerciseId: ex.id)
+    }
+
     private var shouldShowStandardStartButton: Bool {
         guard !isRestDay, let ex = selectedExercise else { return false }
         guard !workoutViewModel.hasCompletedExerciseToday(exerciseId: ex.id) else { return false }
         return ex.id != LegWorkoutSupport.strengthExerciseId &&
-            !CoreWorkoutSupport.isCoreCatalogId(ex.id)
+            !CoreWorkoutSupport.isCoreCatalogId(ex.id) &&
+            ex.id != "pushups"
     }
     
     private var shouldShowPresetSection: Bool {
@@ -200,11 +211,14 @@ struct WorkoutScreen: View {
             let showsStart = includeStartButton && shouldShowStandardStartButton
             let showsLegChoice = includeStartButton && shouldShowLegModeChoice
             let showsCoreStart = includeStartButton && shouldShowCoreStartButton
+            let showsPushChoice = includeStartButton && shouldShowPushModeChoice
             let showsDescription = selectedExercise.map {
                 !workoutViewModel.hasCompletedExerciseToday(exerciseId: $0.id)
             } ?? false
             let pickerHeight = exerciseSelectionBlockHeight(showsDescription: showsDescription)
-            let startButtonHeight: CGFloat = (showsStart || showsLegChoice || showsCoreStart) ? 118 : 0
+            let startButtonHeight: CGFloat = showsPushChoice
+                ? 184
+                : ((showsStart || showsLegChoice || showsCoreStart) ? 118 : 0)
             let headerHeight: CGFloat = 50
             let verticalChrome: CGFloat = (isIPad ? 12 : 4) + tabBarClearance + 16
             let planHeight = max(
@@ -233,6 +247,9 @@ struct WorkoutScreen: View {
                         .appearStaggered(index: 3, revealed: contentRevealed, reduceMotion: reduceMotion)
                 } else if showsCoreStart {
                     coreWorkoutStartButton
+                        .appearStaggered(index: 3, revealed: contentRevealed, reduceMotion: reduceMotion)
+                } else if showsPushChoice {
+                    pushWorkoutChoiceButtons
                         .appearStaggered(index: 3, revealed: contentRevealed, reduceMotion: reduceMotion)
                 } else if showsStart {
                     startButton
@@ -385,7 +402,7 @@ struct WorkoutScreen: View {
                     .font(.system(size: AppTypography.sectionTitle, weight: .semibold))
                     .foregroundColor(.customLabel)
                 Spacer()
-                Text("Tap · 2× start")
+                Text("Tap to choose")
                     .font(.system(size: AppTypography.captionSmall, weight: .medium))
                     .foregroundColor(.customSecondaryLabel)
             }
@@ -413,9 +430,9 @@ struct WorkoutScreen: View {
                                 },
                                 onDoubleTap: {
                                     guard !done else { return }
-                                    if exercise.id == LegWorkoutSupport.strengthExerciseId {
+                                    if exercise.id == LegWorkoutSupport.strengthExerciseId || exercise.id == "pushups" {
                                         selectedExercise = exercise
-                                        // Always offer the run/squats choice — never skip straight past Run.
+                                        // Legs and push-ups always show a mode choice — never skip it.
                                         return
                                     }
                                     if CoreWorkoutSupport.isCoreCatalogId(exercise.id) {
@@ -507,6 +524,8 @@ struct WorkoutScreen: View {
                 .font(.system(size: 11, weight: .medium))
                 .foregroundColor(.customSecondaryLabel)
                 .multilineTextAlignment(.leading)
+                .lineLimit(3)
+                .minimumScaleFactor(0.85)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -562,6 +581,85 @@ struct WorkoutScreen: View {
         "Full session in one sitting · earlier reps still count"
     }
     
+    // MARK: - Push-up mode choice
+
+    private var pushDayTotalReps: Int {
+        if let exercise = selectedExercise, let planExercise = matchedPlanExercise(for: exercise) {
+            return planExercise.totalReps
+        }
+        if let exercise = selectedExercise {
+            return getFallbackReps(for: exercise)
+        }
+        return 10
+    }
+
+    private var pushPlannedSubtitle: String {
+        if hasIncompleteSelectedWorkout {
+            return "Sets and rest · earlier reps still count"
+        }
+        if let exercise = selectedExercise, let planExercise = matchedPlanExercise(for: exercise) {
+            let minutes = WorkoutDurationEstimate.tildeMinutesLabel(
+                totalSeconds: WorkoutDurationEstimate.totalSessionSeconds(planExercise: planExercise)
+            )
+            return "\(planExercise.sets)×\(planExercise.repsPerSet) · \(planExercise.totalReps) total · \(minutes)"
+        }
+        return "Sets and rest · \(pushDayTotalReps) push-ups"
+    }
+
+    private var pushRepItOutSubtitle: String {
+        let total = pushDayTotalReps
+        if hasIncompleteSelectedWorkout {
+            return "All \(total) push-ups in one go · earlier reps still count"
+        }
+        return "Complete all \(total) push-ups for today in one go"
+    }
+
+    private var pushWorkoutChoiceButtons: some View {
+        VStack(spacing: 10) {
+            Text("Choose today’s push-ups")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundColor(.customSecondaryLabel)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 16)
+
+            HStack(alignment: .top, spacing: 10) {
+                Button(action: handleStartPlannedPushWorkout) {
+                    legModeCard(
+                        title: "Today’s workout",
+                        subtitle: pushPlannedSubtitle,
+                        icon: "list.bullet.rectangle"
+                    )
+                }
+                .buttonStyle(.pressable)
+
+                Button(action: handleStartRepItOut) {
+                    legModeCard(
+                        title: "Rep it out",
+                        subtitle: pushRepItOutSubtitle,
+                        icon: "bolt.fill"
+                    )
+                }
+                .buttonStyle(.pressable)
+            }
+            .padding(.horizontal, 16)
+        }
+        .padding(.top, 8)
+        .padding(.bottom, 4)
+    }
+
+    private func handleStartPlannedPushWorkout() {
+        guard let exercise = selectedExercise, exercise.id == "pushups" else { return }
+        startWorkoutHapticTick &+= 1
+        startWorkoutForExercise(exercise, repItOut: false)
+    }
+
+    private func handleStartRepItOut() {
+        guard let exercise = selectedExercise, exercise.id == "pushups" else { return }
+        guard !workoutViewModel.hasCompletedExerciseToday(exerciseId: exercise.id) else { return }
+        startWorkoutHapticTick &+= 1
+        startWorkoutForExercise(exercise, repItOut: true)
+    }
+
     // MARK: - Start Button
     private var startButton: some View {
         Button(action: handleStartWorkout) {
@@ -755,7 +853,7 @@ struct WorkoutScreen: View {
         }
     }
     
-    private func startWorkoutForExercise(_ exercise: Exercise) {
+    private func startWorkoutForExercise(_ exercise: Exercise, repItOut: Bool = false) {
         guard !workoutViewModel.hasCompletedExerciseToday(exerciseId: exercise.id) else {
             DebugLog.log("⏭️ \(exercise.name) already completed today.")
             return
@@ -767,7 +865,7 @@ struct WorkoutScreen: View {
             DebugLog.log("❌ No today's plan found - using fallback reps")
             // Fallback to default reps if no plan
             let fallbackReps = getFallbackReps(for: exercise)
-            startWorkoutWithReps(exercise: exercise, reps: fallbackReps)
+            startWorkoutWithReps(exercise: exercise, reps: fallbackReps, repItOut: repItOut)
             return 
         }
         
@@ -789,16 +887,16 @@ struct WorkoutScreen: View {
         
         if let planExercise = planExercise {
             DebugLog.log("✅ Found exercise in plan: \(planExercise.exercise) with \(planExercise.repsPerSet) reps")
-            startWorkoutWithReps(exercise: exercise, reps: planExercise.totalReps)
+            startWorkoutWithReps(exercise: exercise, reps: planExercise.totalReps, repItOut: repItOut)
         } else {
             DebugLog.log("❌ No matching exercise found in plan - using fallback reps")
             let fallbackReps = getFallbackReps(for: exercise)
-            startWorkoutWithReps(exercise: exercise, reps: fallbackReps)
+            startWorkoutWithReps(exercise: exercise, reps: fallbackReps, repItOut: repItOut)
         }
     }
     
-    private func startWorkoutWithReps(exercise: Exercise, reps: Int) {
-        DebugLog.log("🚀 Starting workout: \(exercise.name) with \(reps) reps")
+    private func startWorkoutWithReps(exercise: Exercise, reps: Int, repItOut: Bool = false) {
+        DebugLog.log("🚀 Starting workout: \(exercise.name) with \(reps) reps\(repItOut ? " (rep it out)" : "")")
         
         // Start app restriction if enabled
         let restrictionService = AppRestrictionService.shared
@@ -808,6 +906,7 @@ struct WorkoutScreen: View {
         
         sessionExercise = exercise
         sessionReps = reps
+        sessionRepItOut = repItOut && exercise.id == "pushups"
         navigateToSession = true
     }
     
